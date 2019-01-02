@@ -2,9 +2,9 @@
 
 This Proof of Concepts uses the DJI Drone SDK to fetch live video from supported DJI drones and analyzes it using Microsoft cognitive services.
 
-#Getting it to work
+# Getting it to work
 
-##Clone repository
+## Clone repository
 	- Register DJI App (Developer Portal)
   - Get your Cognitive Services keys & URLs
 	- Train a Custom Vision Model
