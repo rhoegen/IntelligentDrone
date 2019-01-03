@@ -24,6 +24,7 @@ A Mavic Air can be connected directly to your computer using WiFi. To do this ju
 Please note that you need to provide an internet connection with a LAN cable or seperate WiFi adapter to make the cognitive services request.
 
 ## Start the App
+On the first start the app will not be able to connect to the drone. You'll have to go to the settings page and enter all IDs that you have collected through the paragraphs above. The Settings will be saved on your device so with the next startup, you should see the drone feed in the appropriate page.
 
 # How it was done
 <TBD>
