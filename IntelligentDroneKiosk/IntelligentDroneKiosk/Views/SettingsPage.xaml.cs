@@ -26,35 +26,7 @@ namespace IntelligentDroneKiosk.Views
         Windows.Storage.StorageFolder localFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
         public SettingsPage()
         {
-            this.InitializeComponent();
-            if (localSettings.Values["DjiAppKey"] == null)
-            {
-                localSettings.Values["DjiAppKey"] = "";
-            }
-            if (localSettings.Values["ComputerVisionSubKey"] == null)
-            {
-                localSettings.Values["ComputerVisionSubKey"] = "";
-            }
-            if (localSettings.Values["CustomVisionTrainKey"] == null)
-            {
-                localSettings.Values["CustomVisionTrainKey"] = "";
-            }
-            if (localSettings.Values["CustomVisionPredictKey"] == null)
-            {
-                localSettings.Values["CustomVisionPredictKey"] = "";
-            }
-            if (localSettings.Values["ObjDetectProjectId"] == null)
-            {
-                localSettings.Values["ObjDetectProjectId"] = "";
-            }
-            if (localSettings.Values["ComputerVisionEndpointUrl"] == null)
-            {
-                localSettings.Values["ComputerVisionEndpointUrl"] = "";
-            }
-            if (localSettings.Values["CustomVisionEndpointUrl"] == null)
-            {
-                localSettings.Values["CustomVisionEndpointUrl"] = "";
-            }            
+            this.InitializeComponent();            
 
             txtDjiAppKey.Text = localSettings.Values["DjiAppKey"].ToString();
             txtComputerVisionSubKey.Text = localSettings.Values["ComputerVisionSubKey"].ToString();
