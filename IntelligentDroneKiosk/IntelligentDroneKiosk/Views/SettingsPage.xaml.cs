@@ -54,7 +54,7 @@ namespace IntelligentDroneKiosk.Views
             if (localSettings.Values["CustomVisionEndpointUrl"] == null)
             {
                 localSettings.Values["CustomVisionEndpointUrl"] = "";
-            }
+            }            
 
             txtDjiAppKey.Text = localSettings.Values["DjiAppKey"].ToString();
             txtComputerVisionSubKey.Text = localSettings.Values["ComputerVisionSubKey"].ToString();
@@ -63,6 +63,22 @@ namespace IntelligentDroneKiosk.Views
             txtObjDetectProjectId.Text = localSettings.Values["ObjDetectProjectId"].ToString();
             txtComputerVisionEndpointUrl.Text = localSettings.Values["ComputerVisionEndpointUrl"].ToString();
             txtCustomVisionEndpointUrl.Text = localSettings.Values["CustomVisionEndpointUrl"].ToString();
+
+            switch (localSettings.Values["ObjDetectionSource"])
+            {
+                case "rBComputerVision":
+                    rBCustomVision.IsChecked = false;
+                    rBComputerVision.IsChecked = true;
+                    break;
+                case "rBCustomVision":
+                    rBComputerVision.IsChecked = false;
+                    rBCustomVision.IsChecked = true;
+                    break;
+                default:
+                    rBCustomVision.IsChecked = false;
+                    rBComputerVision.IsChecked = true;
+                    break;
+            }
         }
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
@@ -72,7 +88,17 @@ namespace IntelligentDroneKiosk.Views
             localSettings.Values["CustomVisionPredictKey"] = txtCustomVisionPredictKey.Text;
             localSettings.Values["ObjDetectProjectId"] = txtObjDetectProjectId.Text;
             localSettings.Values["ComputerVisionEndpointUrl"] = txtComputerVisionEndpointUrl.Text;
-            localSettings.Values["CustomVisionEndpointUrl"] = txtCustomVisionEndpointUrl.Text;
+            localSettings.Values["CustomVisionEndpointUrl"] = txtCustomVisionEndpointUrl.Text;            
+        }
+
+        private void RBComputerVision_Checked(object sender, RoutedEventArgs e)
+        {
+            localSettings.Values["ObjDetectionSource"] = "rBComputerVision";
+        }
+
+        private void RBCustomVision_Checked(object sender, RoutedEventArgs e)
+        {
+            localSettings.Values["ObjDetectionSource"] = "rBCustomVision";
         }
     }
 }

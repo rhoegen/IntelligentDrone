@@ -333,23 +333,42 @@ namespace IntelligentDroneKiosk.Views
 
             textBoxCsDescription.Text = await MakeComputerVisionRequest(imageAsJpeg);
             //Get the name and position of the most accurately recognized object according to the model defined by "projectID"
-            ObjectIdentifier obj = await MakeCustomVisionRequest(imageAsJpeg);
-            ObjectIdentifier compVisionRect = await MakeComputerVisionObjectRequest(imageAsJpeg);
+            ObjectIdentifier obj = null;
+            ObjectIdentifier compVisionRect = null;
+            switch (localSettings.Values["ObjDetectionSource"])
+            {
+                case "rBComputerVision":
+                    compVisionRect = await MakeComputerVisionObjectRequest(imageAsJpeg);
+                    break;
+                case "rBCustomVision":
+                    obj = await MakeCustomVisionRequest(imageAsJpeg);
+                    break;
+                default:
+                    compVisionRect = await MakeComputerVisionObjectRequest(imageAsJpeg);
+                    break;
+            }
             try
             {
                 //draw the rectangle where the object is found on the canvas overlaying the image
-                //Custom Vision gives x, y, width and height as percentage of the image dimensions. To get the pixels, the values have to be multiplied with the image height/width
-                //TODO: +60 offset in height is needed to account for the text field, clean solution needed
-                double rectX = obj.Left * VideoSource.PixelWidth;
-                double rectY = obj.Top * VideoSource.PixelHeight+250;
-                double rectWidth = obj.Width * VideoSource.PixelWidth;
-                double rectHeight = obj.Height * VideoSource.PixelHeight;
-                string rectText = obj.Tag;
+                
+                if(obj != null)
+                {
+                    //Custom Vision gives x, y, width and height as percentage of the image dimensions. To get the pixels, the values have to be multiplied with the image height/width
+                    //TODO: +60 offset in height is needed to account for the text field, clean solution needed
+                    double rectX = obj.Left * VideoSource.PixelWidth;
+                    double rectY = obj.Top * VideoSource.PixelHeight;
+                    double rectWidth = obj.Width * VideoSource.PixelWidth;
+                    double rectHeight = obj.Height * VideoSource.PixelHeight;
+                    string rectText = obj.Tag;
 
-                Debug.WriteLine("X: " + rectX + ", Y: " + rectY + ", Width: " + rectWidth + ", Height: " + rectHeight);
+                    Debug.WriteLine("X: " + rectX + ", Y: " + rectY + ", Width: " + rectWidth + ", Height: " + rectHeight);
 
-                //drawRectangle(rectX,rectY ,rectWidth ,rectHeight , rectText);
-                drawRectangle(compVisionRect.Left, compVisionRect.Top, compVisionRect.Width, compVisionRect.Height, compVisionRect.Tag);
+                    drawRectangle(rectX, rectY, rectWidth, rectHeight, rectText);
+                }
+                if(compVisionRect != null)
+                {
+                    drawRectangle(compVisionRect.Left, compVisionRect.Top, compVisionRect.Width, compVisionRect.Height, compVisionRect.Tag);
+                }                
             }
             catch (Exception e)
             {
