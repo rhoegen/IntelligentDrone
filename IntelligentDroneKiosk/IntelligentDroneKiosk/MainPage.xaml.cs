@@ -31,6 +31,35 @@ namespace IntelligentDroneKiosk
         public MainPage()
         {
             DJISDKManager.Instance.SDKRegistrationStateChanged += Instance_SDKRegistrationEvent;
+            if (localSettings.Values["DjiAppKey"] == null)
+            {
+                localSettings.Values["DjiAppKey"] = "";
+            }
+            if (localSettings.Values["ComputerVisionSubKey"] == null)
+            {
+                localSettings.Values["ComputerVisionSubKey"] = "";
+            }
+            if (localSettings.Values["CustomVisionTrainKey"] == null)
+            {
+                localSettings.Values["CustomVisionTrainKey"] = "";
+            }
+            if (localSettings.Values["CustomVisionPredictKey"] == null)
+            {
+                localSettings.Values["CustomVisionPredictKey"] = "";
+            }
+            if (localSettings.Values["ObjDetectProjectId"] == null)
+            {
+                localSettings.Values["ObjDetectProjectId"] = "";
+            }
+            if (localSettings.Values["ComputerVisionEndpointUrl"] == null)
+            {
+                localSettings.Values["ComputerVisionEndpointUrl"] = "";
+            }
+            if (localSettings.Values["CustomVisionEndpointUrl"] == null)
+            {
+                localSettings.Values["CustomVisionEndpointUrl"] = "";
+            }
+
             this.InitializeComponent();
             DJISDKManager.Instance.RegisterApp(localSettings.Values["DjiAppKey"].ToString());
         }
