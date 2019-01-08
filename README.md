@@ -2,6 +2,15 @@
 
 This Proof of Concepts uses the DJI Drone SDK to fetch live video from supported DJI drones and analyzes it using Microsoft cognitive services.
 
+This project uses code from the following projects/sites:
+
+Quickstart Guide for Object Detection: https://docs.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/csharp-tutorial-od
+Quickstart Guide for Computer Vision: https://docs.microsoft.com/en-us/azure/cognitive-services/Computer-vision/quickstarts/csharp-analyze
+DJI SDK Tutorial: https://github.com/dji-sdk/Windows-SDK-Doc/blob/master/source/cn/tutorials/index.md
+Encode WriteableBitmap to JPG: https://stackoverflow.com/questions/39613854/uwp-encode-writeablebitmap-to-jpeg-byte-array
+
+Also used was the project https://github.com/vladkol/CustomVision.COCO to help train a Custom Vision Project using the CoCo Dataset (http://cocodataset.org/).
+
 # Getting it to work
 
 ## Prerequisites
